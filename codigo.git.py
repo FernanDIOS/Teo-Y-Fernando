@@ -447,3 +447,123 @@ while jugar == "si":
         fichero_apuestas.write(f"{usuario} ha apostado {cant} habiendo sacado un {p1} y yo {ia}")
         #Cerramos fichero
         fichero_apuestas.close()
+        
+    elif juego == 5:
+        bola = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+        C = [1, 2, 3, 4, 5, 6, 7]
+        cont = []
+        acier = 0
+        
+        print("Bueno vamos a jugar al bingo de 15 casillas tienes 7 opciones")
+        print("Las reglas son las siguientes:")
+        print()
+        print("Eliges 5 numeros de 15 posibles y dependiendo de los que aciertes tu apuesta se multiplicara por lo correspondiente")
+        print("Solo se tiraran 6 veces la bolita")
+        print("Puedes apostar las 5 veces al mismo numero y si lo aciertas te contaran todas las veces apostadas como acierto")
+        print()
+        print("Posibles puntuaciones:")
+        print("0 aciertos apuesta perdida")
+        print("1 aciertos apuesta perdida")
+        print("2 aciertos apuesta perdida")
+        print("3 aciertos apuesta x 1,5")
+        print("4 aciertos apuesta x 2")
+        print("5 aciertos apuesta x 3,5")
+        
+        #Creamos fichero
+        fichero_bingo = open("Ganancias bingo.txt", "a")
+        
+        #Creamos usuario
+        usuario = input("¿Como te llamas? ")
+        
+        #Creamos monedero
+        dinero = int(input("¿Cuanto dinero tienes? "))
+        apuesta = int(input("¿Cuanto apuestas? "))
+        ganancias = 0
+        
+        #Creamos el carton
+        n1 = int(input("1) Elige un numero del (1 al 17): "))
+        while n1 > 17:
+            n1 = int(input("1) Elige un numero del (1 al 17): "))
+        n2 = int(input("2) Elige un numero del (1 al 17): "))
+        while n2 > 17:
+            n2 = int(input("2) Elige un numero del (1 al 17): "))
+        n3 = int(input("3) Elige un numero del (1 al 17): "))
+        while n3 > 17:
+            n3 = int(input("3) Elige un numero del (1 al 17): "))
+        n4 = int(input("4) Elige un numero del (1 al 17): ")) 
+        while n4 > 17:
+            n4 = int(input("4) Elige un numero del (1 al 17): "))
+        n5 = int(input("5) Elige un numero del (1 al 17): "))
+        while n5 > 17:
+            n5 = int(input("5) Elige un numero del (1 al 17): "))
+        print()
+        print(f"Tus numeros elegidos son {n1} {n2} {n3} {n4} {n5}")
+        print()    
+        for i in C:
+            #Creamos la bolita que sale
+            import random
+            p = len(bola)
+            bolan = random.randint (1, p)
+            del bola[bolan - 1]
+            print()
+            cont += [bolan]
+            #Creamos los condicionantes
+            print("Veamos donde cae esta _______________________________________________________________________")
+            print()
+            if n1 == bolan or n2 == bolan or n3 == bolan or n4 == bolan or n5 == bolan:
+                print(f"¡WOW! Has acertado ha salido {bolan} y es uno de los tuyos LETS GOOO")
+            else:
+                print(f"¡Noooooo! Una pena el numero que ha salido es el {bolan} veamos el siguiente")
+                print()
+                print(f"Quedan estos numeros {bola}")
+                
+            if n1 == bolan:
+                n1 = "P"
+                acier += 1
+            elif n2 == bolan:
+                n2 = "P"
+                acier += 1
+            elif n3 == bolan:
+                n3 = "P"
+                acier += 1
+            elif n4 == bolan:
+                n4 = "P"
+                acier += 1
+            elif n5 == bolan:
+                n5 = "P"
+                acier += 1
+                
+            print()
+            
+        print(f"Has acabado con {acier} aciertos")
+        print()
+        if acier == 1 or acier == 0 or acier == 2:
+            ganancias = -apuesta
+            dinero = dinero - apuesta
+            print(f"Has apostado {apuesta} con {acier} aciertos asique te quedan {dinero}")
+            print()
+            print(f"Has tenido unas ganancias de {ganancias}")
+        elif acier == 3:
+            ganancias = apuesta * 1.5
+            dinero = dinero + ganancias - apuesta
+            print(f"Has apostado {apuesta} teniendo {acier} aciertos asique te has ganado y te quedan {dinero}")
+            print()
+            print(f"Has tenido unas ganancias de {ganancias}")
+        elif acier == 4:
+            ganancias = apuesta * 2
+            dinero = dinero + ganancias - apuesta
+            print(f"Has apostado {apuesta} teniendo {acier} aciertos asique te has ganado y te quedan {dinero}")
+            print()
+            print(f"Has tenido unas ganancias de {ganancias}")
+        elif acier == 5:
+            ganancias = apuesta * 3.5
+            dinero = dinero + ganancias - apuesta
+            print(f"Has apostado {apuesta} teniendo {acier} aciertos asique te has ganado y te quedan {dinero}")
+            print()
+            print(f"Has tenido unas ganancias de {ganancias}")
+                
+        #Escribimos en el fichero
+        fichero_bingo.write(f"{usuario} ha tenido unas ganancias de {ganancias} habiendo apostado {apuesta} y ha acabado con un total en su bolsillo de {dinero} HA ACERTADO {acier}"+ "\n")
+        #Cerramos fichero
+        fichero_bingo.close() 
+        fichero_bingo.close()
