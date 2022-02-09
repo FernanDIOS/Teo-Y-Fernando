@@ -128,7 +128,7 @@ while jugar == "si":
         print()
         
         
-    if juego == 2:
+    elif juego == 2:
         
             #Creamos variable ganancias
             ganancias = 0
@@ -204,4 +204,96 @@ while jugar == "si":
             jugar = jugar.lower()
             print()
             
+    elif juego == 3:
+        #Entramos al juego de los dados
+        print("Bueno bueno vamos a jugar a los dados lets go")
+        
+        #Generamos lo que es el reusltado de dado
+        import random
+        resultado = random.randint(1,10)
+        
+        #Definimos el multiplicador
+        mult = 1
+        
+        #Definimos las ganancias
+        ganancias = 0
+        
+        #Explica el juego
+        print("Te explico, si sacas en un dado de 10 caras un 1 o 2 pierdes la apuesta y todo tu progreso")
+        print("Si scacas algo que no sea eso como eso se te multiplica por 1.(ese numero)")
+        print("Saca un 6 pues se multiplica por 1.6")
+        
+        #Le creamos el nombre y lo metemos en la lista
+        usuario = input("Escribe tu nombre como jugador: ")
+        print()
+        
+        #Generamos variables del monedero
+        dinero = int(input("¿Cuanto dinero tienes? "))
+        apuesta = int(input("¿Cuanto puedes apostar? "))
+        #Definimos el querer jugar mas
+        mas = "si"
+        
+        #Creamos fichero
+        fichero_dados = open("Ganancias dados.txt", 'a')
+        
+        #Marcamos que no puede apostar EXACTAMENTE lo que tiene
+        if dinero != apuesta:
+            #Marcamos la posibilidad de ganar
+            while resultado > 2 and mas == "si":
+                
+                #Le contamos lo que ha salido
+                print(f"Ojo ha salido un {resultado} es decir se te multiplica tus {apuesta} por {mult + (resultado / 10)} tienes {(dinero - apuesta) + (apuesta * (mult + (resultado / 10)))}")
+                print()
+                
+                #Le contamos como va
+                ganancias = apuesta * (mult + (resultado / 10))
+                dinero = (dinero - apuesta) + (apuesta * (mult + (resultado / 10)))
+                print()
+                print(f"Llevas {ganancias} de ganancias")
+                
+                #Le ofrecemos seguir
+                mas = input("¿Quieres mas? ")
+                mas  = mas.lower()
+                print()
+                if mas != "si":
+                    print()
+                    print(f"Oh vale pues te quedas con  {(dinero - apuesta) + (apuesta * (mult + (resultado / 10)))} y tienes unas ganancias de {ganancias} ")
+                    
+                    #Añadimos info al fichero
+                    fichero_dados.write(f"{usuario}, debido a que ha salido un {resultado} sus {apuesta} de apuesta se han multiplicado por {mult + (resultado / 10)} y ha acabado con {(dinero - apuesta) + (apuesta * (mult + (resultado / 10)))} ha tenido unas ganancias de {ganancias}" + "\n")
+                    #Cerramos fichero
+                    fichero_dados.close()
+                
+                apuesta = (apuesta * (mult + (resultado / 10)))
+                print(f"Estas apostando {apuesta} dineros")
+                print()
+                
+                #Le tiramos de nuevo el dado
+                import random
+                resultado = random.randint(1,9)
+            
+                #Marcamos la posibilidad de perder
+            while resultado == 1 or resultado == 2:
+                print(f"Oh vaya ha salido un {resultado} y has perdido tus maravillosos {apuesta}")
+                ganancias = - apuesta
+                dinero = dinero + ganancias
+                print(f"Como has perdido te quedan {dinero} dineros")
+                print()
+                
+                #Añadimos info al fichero
+                fichero_dados.write(f"{usuario}, oh vaya ha salido un {resultado} y has perdido tus maravillosos {apuesta} y te quedan {dinero - apuesta} teniendo unas ganancias de {ganancias}" + "\n")
+                #Cerramos fichero
+                fichero_dados.close()
+                
+                #Le tiramos de nuevo el dado
+                import random
+                resultado = random.randint(1,10)
+            
+            #Se va sabiendo las ganancias
+            print()
+            print(f"Has tenido unas gannacias de {ganancias}")
+            
+        else:
+            print("No puedes apostar lo que tienes o apuestas mas o menos")
+            print()
             
