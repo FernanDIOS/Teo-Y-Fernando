@@ -616,7 +616,7 @@ while jugar == "si":
                     apuesta = int(input("¿Cuanto dinero apuestas? "))
                     print()
 
-            if ganancias < -10000:
+            elif ganancias < -10000:
                 mas == "A"
                 print("Lo sentimos pero tienes demasiadas perdidas FUERA")
                 break
@@ -632,41 +632,41 @@ while jugar == "si":
             #DIAMANTE
             if pri == 1:
                 pri = "DIAMANTE"
-            if seg == 1:
+            elif seg == 1:
                 seg = "DIAMANTE"
-            if ter == 1:
+            elif ter == 1:
                 ter = "DIAMANTE"
 
             #PREMIO
             if pri == 2 or pri == 3:
                 pri = "PREMIO"
-            if seg == 2 or seg == 3:
+            elif seg == 2 or seg == 3:
                 seg = "PREMIO"
-            if ter == 2 or ter == 3:
+            elif ter == 2 or ter == 3:
                 ter = "PREMIO"
 
             #COIN
             if pri in range (4, 9):
                 pri = "COIN"
-            if seg in range (4, 9):
+            elif seg in range (4, 9):
                 seg = "COIN"
-            if ter in range (4, 9):
+            elif ter in range (4, 9):
                 ter = "COIN"
 
             #UVA
             if pri in range (9, 21):
                 pri = "UVA"
-            if seg in range (9, 21):
+            elif seg in range (9, 21):
                 seg = "UVA"
-            if ter in range (9, 21):
+            elif ter in range (9, 21):
                 ter = "UVA"
 
             #MIERDA
             if pri in range (21, 31):
                 pri = "NADA"
-            if seg in range (21, 31):
+            elif seg in range (21, 31):
                 seg = "NADA"
-            if ter in range (21, 31):
+            elif ter in range (21, 31):
                 ter = "NADA"
 
             if not (pri == "DIAMANTE" and seg == "DIAMANTE" and ter == "DIAMANTE") or (pri == "PREMIO" and seg == "PREMIO" and ter == "PREMIO") or (pri == "COIN" and seg == "COIN" and ter == "COIN") or (pri == "UVA" and seg == "UVA" and ter == "UVA"):
@@ -684,7 +684,7 @@ while jugar == "si":
                     print(f"Llevas unas ganancias de {ganancias}")
                     #PONEMOS COMO POSIBILIDAD EL CAMBIAR DE APUESTA
                     a += 1
-                if pri == "PREMIO" and seg == "PREMIO" and ter == "PREMIO":
+                elif pri == "PREMIO" and seg == "PREMIO" and ter == "PREMIO":
                     print(f"Has tenido suerte y ha salido {pri}-{seg}-{ter}")
                     dinero = dinero + apuesta * 19
                     ganancias = ganancias + apuesta * 19
@@ -692,7 +692,7 @@ while jugar == "si":
                     print(f"Llevas unas ganancias de {ganancias}")
                     #PONEMOS COMO POSIBILIDAD EL CAMBIAR DE APUESTA
                     a += 1
-                if pri == "COIN" and seg == "COIN" and ter == "COIN":
+                elif pri == "COIN" and seg == "COIN" and ter == "COIN":
                     print(f"Has tenido suerte y ha salido {pri}-{seg}-{ter}")
                     dinero = dinero + apuesta * 10
                     ganancias = ganancias + apuesta * 10
@@ -700,7 +700,7 @@ while jugar == "si":
                     print(f"Llevas unas ganancias de {ganancias}")
                     #PONEMOS COMO POSIBILIDAD EL CAMBIAR DE APUESTA
                     a += 1
-                if pri == "UVA" and seg == "UVA" and ter == "UVA":
+                elif pri == "UVA" and seg == "UVA" and ter == "UVA":
                     print(f"Has tenido suerte y ha salido {pri}-{seg}-{ter}")
                     dinero = dinero + apuesta * 5
                     ganancias = ganancias + apuesta * 5
