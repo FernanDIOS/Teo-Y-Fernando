@@ -297,3 +297,153 @@ while jugar == "si":
             print("No puedes apostar lo que tienes o apuestas mas o menos")
             print()
             
+    elif juego == 4:
+        mas = "si"
+            
+        print("Vale vamos a jugar a las apuestas, jugaras contra mi")
+        print("Tu obtendras un numero y segun su valor apostaras contra mi que tendre otro numero apostando, solo con participar un minimo (tu dinero total / 15) sera tu apuesta minima y tu eliges si apuestas mas")
+        print()
+        print("En caso de empate ganas tu")
+        
+        usuario = input("¿Como te llamas? ")
+        
+        #Creamos monedero
+        dinero = int(input("¿Cuanto dinero tienes? "))
+        print()
+        dinero_final = dinero
+        
+        #Creamos fichero
+        fichero_apuestas = open("Ganancias apuestas.txt", "a")
+            
+        #Monedero Banca
+        banca = 100000
+        a_banca = 0
+        
+        apost = "si"
+        
+        #Creamos el bucle del juego
+        while mas == "si" and apost == "si":
+            
+            #Creamos la variable full
+            import random
+            full = random.randint(1,300)
+            
+            #Creamos los resultados con los que apostamos
+            import random
+            ia = random.randint(1,10)
+            
+            import random
+            p1 = random.randint(1,10)
+            
+            #Creamos variable para que la IA mienta
+            import random
+            m = random.randint(1,3)
+            
+            #La IA va con todo
+            if full == 1:
+                a_banca = banca
+                print("Voy con {banca} es muy buen resultado el mio")
+                print()
+            
+            #La IA no va con todo
+            else:
+                if ia > 8:
+                    #IA decide con cuanto juega
+                    import random
+                    a_banca = random.randint(1000,4000)
+                    if m == 1:
+                        print("Meh")
+                        print()
+                    else:
+                        print("SE VIENEN COSITAS")
+                        print()
+                elif ia > 5 and ia <= 8:
+                    #IA decide con cuanto juega
+                    import random
+                    a_banca = random.randint(700,1000)
+                    if m == 2:
+                        print("SE VIENEN COSITAS")
+                        print()
+                    else:
+                        print("Meh")
+                        print()
+                elif ia > 0 and ia <= 5:
+                    #IA decide con cuanto juega
+                    import random
+                    a_banca = random.randint(500,700)
+                    if m == 3:
+                        print("SE VIENEN COSITAS")
+                        print()
+                    else:
+                        print("Meh")
+                        print()
+            
+            #Se muestra el resutltado del jugador y se le dan pistas de su numero
+            if p1 > 7 and p1 <= 10:
+                print("Tu numero esta bastante bien (8-10)")
+                #Le ofrecemos apostar mas
+                apost = input("¿Quieres apostar mas? ")
+                apost = apost.lower()
+                if apost == "si":
+                    print()
+                    #Le ofrecemos cuanto mas quiere apostar
+                    cant = int(input("¿Cuanto quieres apostar? "))
+                    print()
+                else:
+                    dinero = - (dinero / 15)
+            elif p1 <= 7 and p1 > 4:
+                print("Tu numero es pichi picha (5-7)")
+                #Le ofrecemos apostar mas
+                apost = input("¿Quieres apostar mas? ")
+                apost = apost.lower()
+                if apost == "si":
+                    print()
+                    #Le ofrecemos cuanto mas quiere apostar
+                    cant = int(input("¿Cuanto quieres apostar? "))
+                    print()
+                else:
+                    dinero = - (dinero / 15)
+            elif p1 > 0 and p1 <= 4:
+                print("Tu numero es una mierda")
+                #Le ofrecemos apostar mas
+                apost = input("¿Quieres apostar mas? ")
+                apost = apost.lower()
+                if apost == "si":
+                    print()
+                    #Le ofrecemos cuanto mas quiere apostar
+                    cant = int(input("¿Cuanto quieres apostar? "))
+                    print()
+                else:
+                    dinero_final = dinero_final - dinero / 15
+                    banca += dinero / 15
+            
+            #Suceso del full
+            elif full == 1:
+                a_banca = banca
+                print("Voy con {banca} es muy buen resultado el mio")
+                print()
+            
+            #Hubieses ganado pero no jugaste
+            elif ia <= p1 and apost != "si":
+                print(f"Hubieses ganado pero no has querido apostar porque has sacado un {p1} y yo he sacado un {ia} asique te quedan {dinero_final} yo tengo {banca}")
+                
+            #Hubieses perdido pero no jugaste
+            elif p1 < ia and apost != "si":
+                print(f"Hubieses perdido asique has hecho bien en no apostar debido a que he sacado un {ia} y tu has sacado un {p1} asique te quedan {dinero_final} yo tengo {banca}")
+                
+            #Has ganado apostando
+            elif ia <= p1 and apost == "si":
+                dinero_final = dinero_final + a_banca
+                banca -= a_banca
+                print(f"Has ganado y encima apostando {cant}, has sacado un {p1} y yo he sacado un {ia} y he apostado {a_banca} asique has acabado con {dinero_final} me quedan {banca}")
+                
+            #Has perdido apostando
+            elif p1 < ia and apost == "si":
+                banca += (dinero / 15 + cant) + a_banca
+                dinero_final = dinero_final - cant - dinero/15
+                print(f"Joe has perdido y encima has apostado {cant}, he sacado un {ia} apostado {a_banca} y tu has sacado un {p1} te quedan {dinero_final} yo tengo {banca}")
+        
+        #Manipulamos fichero
+        fichero_apuestas.write(f"{usuario} ha apostado {cant} habiendo sacado un {p1} y yo {ia}")
+        #Cerramos fichero
+        fichero_apuestas.close()
