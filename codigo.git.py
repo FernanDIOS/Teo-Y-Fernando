@@ -567,3 +567,153 @@ while jugar == "si":
         #Cerramos fichero
         fichero_bingo.close() 
         fichero_bingo.close()
+        
+    elif juego == 6:
+        #PRESENTAMOS EL JUEGO
+        print("Buenas soy la maquina tragaperras la que se traga todo lo que me eches estas son las reglas:")
+        print("SOLO puedes cambiar de apuesta si has ganado")
+        print("Puedes dejar de jugar por cada tirada")
+        print()
+        print("ESTOS SON LOS PREMIOS:")
+        print("DIAMANTE = APUESTA X 40")
+        print("PREMIO   = APUESTA X 19")
+        print("COIN     = APUESTA X 10")
+        print("UVA      = APUESTA X 5")
+        print("NADA     = APUESTA PERDIDA")
+        print()
+        print("Hay 4 posibles premios:")
+        print( "DIAMANTE--DIAMANTE--DIAMANTE")
+        print("PREMIO----PREMIO-----PREMIO")
+        print("COIN------COIN-------COIN")
+        print("UVA-------UV-A-------UVA")
+        print("KAKA------KAKA-------KAKA")
+        print()
+        print("Tienes que tirar y ver si caen 3 juntos")
+        print()
+        print("-------------------------------------------------------------------------------------------")
+        print()
+
+        #VARIABLE DE JUGAR MUCHO DE SEGUIDO
+        mas = "si"
+
+
+        #CREAMOS UN MONEDERO
+        dinero = int(input("¿Cuanto dinero tienes? "))
+        apuesta = int(input("¿Cuanto dinero apuestas? "))
+        print()
+        ganancias = 0
+        cambio = "no"
+        a = 0
+
+        while mas == "si":
+
+            #CREAMOS LA POSIBILIDAD DE CAMBIAR DE APUESTA
+            if a != 0:
+                cambio = input("¿Cambias tu apuesta? ")
+                print()
+                cambio = cambio.lower()
+                if cambio == "si":
+                    apuesta = int(input("¿Cuanto dinero apuestas? "))
+                    print()
+
+            if ganancias < -10000:
+                mas == "A"
+                print("Lo sentimos pero tienes demasiadas perdidas FUERA")
+                break
+
+            #CREAMOS LO QUE SALE EN CADA UNA        
+            import random
+            pri = random.randint(1, 30)
+            import random
+            seg = random.randint(1, 30)
+            import random
+            ter = random.randint(1, 30)
+
+            #DIAMANTE
+            if pri == 1:
+                pri = "DIAMANTE"
+            if seg == 1:
+                seg = "DIAMANTE"
+            if ter == 1:
+                ter = "DIAMANTE"
+
+            #PREMIO
+            if pri == 2 or pri == 3:
+                pri = "PREMIO"
+            if seg == 2 or seg == 3:
+                seg = "PREMIO"
+            if ter == 2 or ter == 3:
+                ter = "PREMIO"
+
+            #COIN
+            if pri in range (4, 9):
+                pri = "COIN"
+            if seg in range (4, 9):
+                seg = "COIN"
+            if ter in range (4, 9):
+                ter = "COIN"
+
+            #UVA
+            if pri in range (9, 21):
+                pri = "UVA"
+            if seg in range (9, 21):
+                seg = "UVA"
+            if ter in range (9, 21):
+                ter = "UVA"
+
+            #MIERDA
+            if pri in range (21, 31):
+                pri = "NADA"
+            if seg in range (21, 31):
+                seg = "NADA"
+            if ter in range (21, 31):
+                ter = "NADA"
+
+            if not (pri == "DIAMANTE" and seg == "DIAMANTE" and ter == "DIAMANTE") or (pri == "PREMIO" and seg == "PREMIO" and ter == "PREMIO") or (pri == "COIN" and seg == "COIN" and ter == "COIN") or (pri == "UVA" and seg == "UVA" and ter == "UVA"):
+                print(f"Oh vaya has fallado ha salido {pri}-{seg}-{ter}")
+                dinero = dinero - apuesta
+                ganancias = ganancias - apuesta
+                print(f"Te quedan {dinero}")
+                print(f"Llevas unas ganancias de {ganancias}")
+            else:
+                if pri == "DIAMANTE" and seg == "DIAMANTE" and ter == "DIAMANTE":
+                    print(f"Has tenido suerte y ha salido {pri}-{seg}-{ter}")
+                    dinero = dinero + apuesta * 40
+                    ganancias = ganancias + apuesta * 40
+                    print(f"Ojo has tenido suerte eh tu {apuesta} se ha multiplicado x 40 y tienes {dinero}")
+                    print(f"Llevas unas ganancias de {ganancias}")
+                    #PONEMOS COMO POSIBILIDAD EL CAMBIAR DE APUESTA
+                    a += 1
+                if pri == "PREMIO" and seg == "PREMIO" and ter == "PREMIO":
+                    print(f"Has tenido suerte y ha salido {pri}-{seg}-{ter}")
+                    dinero = dinero + apuesta * 19
+                    ganancias = ganancias + apuesta * 19
+                    print(f"Ojo has tenido suerte eh tu {apuesta} se ha multiplicado x 19 y tienes {dinero}")
+                    print(f"Llevas unas ganancias de {ganancias}")
+                    #PONEMOS COMO POSIBILIDAD EL CAMBIAR DE APUESTA
+                    a += 1
+                if pri == "COIN" and seg == "COIN" and ter == "COIN":
+                    print(f"Has tenido suerte y ha salido {pri}-{seg}-{ter}")
+                    dinero = dinero + apuesta * 10
+                    ganancias = ganancias + apuesta * 10
+                    print(f"Ojo has tenido suerte eh tu {apuesta} se ha multiplicado x 10 y tienes {dinero}")
+                    print(f"Llevas unas ganancias de {ganancias}")
+                    #PONEMOS COMO POSIBILIDAD EL CAMBIAR DE APUESTA
+                    a += 1
+                if pri == "UVA" and seg == "UVA" and ter == "UVA":
+                    print(f"Has tenido suerte y ha salido {pri}-{seg}-{ter}")
+                    dinero = dinero + apuesta * 5
+                    ganancias = ganancias + apuesta * 5
+                    print(f"Ojo has tenido suerte eh tu {apuesta} se ha multiplicado x 5 y tienes {dinero}")
+                    print(f"Llevas unas ganancias de {ganancias}")
+                    #PONEMOS COMO POSIBILIDAD EL CAMBIAR DE APUESTA
+                    a += 1
+
+
+
+            #VARIABLE DE SEGUIR        
+            mas = input("¿Quieres jugar mas? ")
+            mas = mas.lower()
+
+        print()
+        print(f"Te vas con unas ganancias de {ganancias}") 
