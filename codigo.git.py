@@ -14,7 +14,7 @@ while jugar == "si":
     print("Jugar a los DADOS - 3")
     print("Jugar a las APUESTAS - 4")
     print("Jugar al BINGO - 5")
-    print("Jugar a la TRAGAPERRAS - 6")
+    print("Jugar a la TRAGAPERRAS - 6 hihi ha")
     
     juego = int(input("¿A que quieres jugar? "))
     print()
